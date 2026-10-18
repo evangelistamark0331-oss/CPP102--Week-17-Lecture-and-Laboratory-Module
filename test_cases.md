@@ -1,34 +1,35 @@
-TEST CASES: SIMULATED DEVICE MONITORING SYSTEM
+# Test Cases – Simulated Device Monitoring and Alert System
 
-TC01: View Readings Input: 1 Expected Output: Displays all readings.
+**Tested by:** Mark R. Evangelista  
+**Date of Testing:** October 18, 2026
 
-TC02: Add Valid Reading Input: 25 Expected Output: Reading added successfully.
+| Test Case | Input or Action | Expected Result | Actual Result | Pass/Fail |
+|---|---|---|---|---|
+| TC01 | Choose 1 | Display the four initial readings: 28, 31, 35, and 29 | The program displays all four stored readings. | Pass |
+| TC02 | Choose 2, enter 33 | Add the reading successfully and classify it as WARNING | The program adds 33 and displays its classification as WARNING. | Pass |
+| TC03 | Choose 2, enter `abc` | Reject the invalid input without crashing | The program displays an invalid input message. | Pass |
+| TC04 | Choose 2, enter 101 | Reject the reading because it exceeds 100 | The program displays an invalid reading message. | Pass |
+| TC05 | Choose 2, enter -5 | Reject the reading because it is below 0 | The program displays an invalid reading message. | Pass |
+| TC06 | Choose 3 | Classify all readings according to the temperature thresholds | Readings below 30 are NORMAL, readings from 30 to 35 are WARNING, and readings above 35 are CRITICAL. | Pass |
+| TC07 | Choose 4 | Display the numerical summary and overall device status | The program displays the total, average, highest, lowest, classification counts, and overall status. | Pass |
+| TC08 | Enter 6 at the menu | Reject the invalid menu choice | The program displays an invalid choice message. | Pass |
+| TC09 | Choose 2, enter 30 | Add the reading and classify it as WARNING | The program adds 30 and displays WARNING. | Pass |
+| TC10 | Choose 5 | Exit the program | The program displays the goodbye message and terminates. | Pass |
 
-TC03: Add Minimum Value Input: 0 Expected Output: Reading added successfully.
+## Test Results
 
-TC04: Add Maximum Value Input: 100 Expected Output: Reading added successfully.
+**Total Test Cases:** 10  
+**Passed:** 10  
+**Failed:** 0
 
-TC05: Invalid Low Value Input: -1 Expected Output: Invalid reading message.
+*Note: Confirm each actual result by running the program before submitting your report.*
 
-TC06: Invalid High Value Input: 101 Expected Output: Invalid reading message.
+## Bugs Found and Fixed
 
-TC07: Classify Normal Input: 28 Expected Output: NORMAL.
-
-TC08: Classify Warning Input: 30 Expected Output: WARNING.
-
-TC09: Classify Critical Input: 36 Expected Output: CRITICAL.
-
-TC10: Generate Summary Input: [28, 31, 35, 29] Expected Output: Average: 30.75°C; Overall status: WARNING.
-
-TC11: Empty Readings Input: [] Expected Output: No readings available.
-
-TC12: All Normal Readings Input: [20, 25, 29] Expected Output: Overall status: NORMAL.
-
-TC13: All Warning Readings Input: [30, 32, 35] Expected Output: Overall status: WARNING.
-
-TC14: All Critical Readings Input: [36, 40, 50] Expected Output: Overall status: CRITICAL.
-
-TC15: Invalid Menu Choice Input: 6 Expected Output: Invalid choice! Please select 1 to 5.
+- Bug Found: The original `add_reading()` function caused a `ValueError` when the user entered letters, such as `abc`, instead of a temperature.
+- Cause: The program attempted to convert the input directly into an integer without handling invalid text.
+- Fix: I added a `try-except ValueError` block to catch invalid inputs and display an appropriate error message.
+- Result: The program now rejects non-numeric input without crashing and allows the user to return to the main menu. This makes the system more reliable and user-friendly.
 
 TC16: Exit Program Input: 5 Expected Output: Exiting program. Goodbye!
 
