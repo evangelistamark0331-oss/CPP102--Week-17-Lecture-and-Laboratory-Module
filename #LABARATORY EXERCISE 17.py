@@ -18,13 +18,21 @@ def view_readings():
     for i, temp in enumerate(reading, start=1):
         print(f"Reading {i}: {temp} C")
         
+
 def add_reading():
-    temp = int(input("Enter temperature (0-100):"))
-    if 0<= temp <= 100:
-        reading.append(temp)
-        print("Reading added successfully.")
-    else:
-        print("Invalid Reading! Enter a number from 0 to 100.")
+    try:
+        temp = int(input("Enter temperature (0-100): "))
+
+        if 0 <= temp <= 100:
+            reading.append(temp)
+            print("Reading added successfully.")
+            print("Classification:", classify_reading(temp))
+        else:
+            print("Invalid Reading! Enter a number from 0 to 100.")
+
+    except ValueError:
+        print("Invalid input! Enter a whole number only.")
+
     
 def classify_readings():
     print("READING CLASSIFICATION")
